@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GRADLE_OPTS: -Xmx4g
+      JAVA_TOOL_OPTIONS: -Xmx4g
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,27 +25,21 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      # დააყენე ზუსტად ის პაკეტები, რაც გვჭირდება აგებისთვის
       - name: Install Android packages
         run: |
           sdkmanager --install "platforms;android-34" "build-tools;34.0.0" "platform-tools" "cmdline-tools;latest"
           yes | sdkmanager --licenses
 
-      # დაგვაყენებინე Gradle გლობალურად (wrapper-ის გარეშე)
-      - name: Provision Gradle
+      - name: Provision Gradle (no cache)
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.7
-  build:
-    runs-on: ubuntu-latest
-    env:
-      GRADLE_OPTS: -Xmx4g
-      JAVA_TOOL_OPTIONS: -Xmx4g
+          cache-disabled: true
 
       - name: Build debug APK
         run: |
           gradle --version
-          gradle :app:assembleDebug
+          gradle :app:assembleDebug --stacktrace
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
