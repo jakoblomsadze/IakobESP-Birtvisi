@@ -32,6 +32,11 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.7
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GRADLE_OPTS: -Xmx4g
+      JAVA_TOOL_OPTIONS: -Xmx4g
 
       - name: Build debug APK
         run: |
