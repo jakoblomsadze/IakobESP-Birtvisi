@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
-id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.android")
+}
 
- }
+
 
 android {
     namespace = "com.birtvisi.bridge"
@@ -26,10 +27,10 @@ kotlinOptions {jvmTarget = "17"}
         }
         debug { isMinifyEnabled = false }
     }
-
-    buildFeatures { compose = true }
-    composeOptions { kotlinCompilerExtensionVersion = "1.6.11" }
-    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
+buildFeatures { compose = true }
+composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
+kotlinOptions { jvmTarget = "17" }
+ }
 }
 
 dependencies {
