@@ -1,12 +1,17 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")   // ←  დამატება
-}
+ }
 
 android {
     namespace = "com.birtvisi.bridge"
     compileSdk = 34
+composeOptions {
+    kotlinCompilerExtensionVersion = "1.5.15"
+}
+kotlinOptions {
+    jvmTarget = "17"
+}
 
     defaultConfig {
         applicationId = "com.birtvisi.bridge"
